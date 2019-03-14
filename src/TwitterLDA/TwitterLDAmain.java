@@ -36,11 +36,20 @@ import Common.JC;
 
 public class TwitterLDAmain {
 
+	static boolean group_already_used(String group) {
+		String base = System.getProperty("user.dir") + "/data/";
+		File f = new File(base + "/ModelRes/" + group);
+		return f.exists() && f.isDirectory();
+	}
+
 	static ArrayList<String> stopWords;
 
 	public static void main(String args[]) throws Exception {
 		String base = System.getProperty("user.dir") + "/data/";
 		String name = "test";
+		if (group_already_used(name)) {
+			throw new Exception("Group " + name + " has already produced model output, and should not be overwritten.");
+		}
 		char[] options = { 'f', 'i', 'o', 'p', 's' };
 		String filelist = base + "/filelist_" + name + ".txt";
 		String dataDir = base + "/Data4Model/" + name + "/";
