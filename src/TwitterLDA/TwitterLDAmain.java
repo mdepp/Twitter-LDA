@@ -46,7 +46,10 @@ public class TwitterLDAmain {
 
 	public static void main(String args[]) throws Exception {
 		String base = System.getProperty("user.dir") + "/data/";
-		String name = "test";
+		String name = "test-steam";
+		if (args.length > 0) {
+			name = args[0];
+		}
 		if (group_already_used(name)) {
 			throw new Exception("Group " + name + " has already produced model output, and should not be overwritten.");
 		}
